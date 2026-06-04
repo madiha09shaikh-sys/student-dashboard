@@ -1,140 +1,211 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import Image from "next/image";
-import {
-  LayoutDashboard,
-  BookOpen,
-  BarChart3,
-  Settings,
-} from "lucide-react";
+import { Inter } from "next/font/google";
 
-import { Orbitron } from "next/font/google";
-
-const orbitron = Orbitron({
-  subsets: ["latin"],
-  weight: ["400", "600", "700"],
+const inter = Inter({
+subsets: ["latin"],
+weight: ["400", "600", "700", "800"],
 });
 
-const navItems = [
-  { name: "Dashboard", icon: LayoutDashboard },
-  { name: "Courses", icon: BookOpen },
-  { name: "Analytics", icon: BarChart3 },
-  { name: "Settings", icon: Settings },
-];
+export default function HeroTile({
+coursesCount,
+}: {
+coursesCount: number;
+}) {
+return (
+<motion.article
+initial={{ opacity: 0, y: 30 }}
+animate={{ opacity: 1, y: 0 }}
+whileHover={{
+scale: 1.02,
+boxShadow: "0 0 80px rgba(34,211,238,0.25)",
+}}
+transition={{
+type: "spring",
+stiffness: 300,
+damping: 20,
+}}
+className="
+relative
+overflow-hidden
+rounded-3xl
+border
+border-cyan-500/20
+bg-[#0b1020]
+backdrop-blur-xl
+p-6
+sm:p-8
+shadow-[0_0_50px_rgba(34,211,238,0.08)]
+"
+>
+{/* Gradient Overlay */} <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 via-transparent to-purple-500/10" />
 
-export default function Sidebar() {
-  const [active, setActive] = useState("Dashboard");
+```
+  {/* Glow Orb 1 */}
+  <motion.div
+    animate={{
+      x: [0, 50, -40, 0],
+      y: [0, -40, 30, 0],
+      scale: [1, 1.3, 0.9, 1],
+    }}
+    transition={{
+      duration: 10,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+    className="
+      absolute
+      -top-20
+      -right-20
+      h-96
+      w-96
+      rounded-full
+      bg-cyan-400/40
+      blur-[120px]
+    "
+  />
 
-  return (
-    <>
-      {/* ================= DESKTOP SIDEBAR ================= */}
-      <aside className="hidden md:flex w-20 lg:w-64 border-r border-white/10 bg-black/40 backdrop-blur-2xl flex-col p-5">
+  {/* Glow Orb 2 */}
+  <motion.div
+    animate={{
+      x: [0, -40, 30, 0],
+      y: [0, 30, -25, 0],
+      scale: [1, 0.8, 1.2, 1],
+    }}
+    transition={{
+      duration: 12,
+      repeat: Infinity,
+      ease: "easeInOut",
+    }}
+    className="
+      absolute
+      -bottom-20
+      -left-20
+      h-96
+      w-96
+      rounded-full
+      bg-purple-500/40
+      blur-[120px]
+    "
+  />
 
-        {/* BRAND SECTION */}
-        <div className="flex items-center gap-3 mb-10">
+  <div className="relative z-10">
+    <h1 className={`leading-tight ${inter.className}`}>
+      <motion.span
+        initial={{ opacity: 0, y: 25 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.2,
+          type: "spring",
+        }}
+        className="
+          block
+          text-3xl
+          sm:text-4xl
+          md:text-5xl
+          font-bold
+          text-white
+        "
+      >
+        Welcome Back
+      </motion.span>
 
-         
-         
+      <motion.span
+        animate={{
+          backgroundPosition: [
+            "0% 50%",
+            "100% 50%",
+            "0% 50%",
+          ],
+        }}
+        transition={{
+          duration: 6,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+        style={{
+          backgroundSize: "200% 200%",
+        }}
+        className="
+          block
+          text-4xl
+          sm:text-5xl
+          md:text-6xl
+          font-extrabold
+          bg-gradient-to-r
+          from-cyan-300
+          via-sky-400
+          to-purple-500
+          bg-clip-text
+          text-transparent
+        "
+      >
+        Madiha
+      </motion.span>
+    </h1>
 
-          {/* BRAND NAME */}
-          <h2
-            className={
-              orbitron.className +
-              " text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500 font-bold text-xl tracking-wider"
-            }
-          >
-            EduVerse
-          </h2>
+    <motion.p
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 0.5 }}
+      className="mt-4 text-gray-300"
+    >
+      You have{" "}
+      <span className="font-bold text-white">
+        {coursesCount}
+      </span>{" "}
+      active courses in progress
+    </motion.p>
 
-        </div>
+    <div className="mt-6 flex flex-wrap gap-3">
+      <motion.div
+        animate={{
+          scale: [1, 1.08, 1],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+        }}
+        className="
+          rounded-full
+          border
+          border-cyan-500/20
+          bg-cyan-500/10
+          px-4
+          py-2
+          text-sm
+          text-cyan-300
+        "
+      >
+        🔥 12 Day Streak
+      </motion.div>
 
-        {/* NAV ITEMS */}
-        <nav className="space-y-2">
-          {navItems.map((item) => {
-            const Icon = item.icon;
+      <motion.div
+        animate={{
+          y: [0, -4, 0],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+        }}
+        className="
+          rounded-full
+          border
+          border-purple-500/20
+          bg-purple-500/10
+          px-4
+          py-2
+          text-sm
+          text-purple-300
+        "
+      >
+        📚 {coursesCount} Courses
+      </motion.div>
+    </div>
+  </div>
+</motion.article>
 
-            return (
-              <button
-                key={item.name}
-                onClick={() => setActive(item.name)}
-                className="relative w-full"
-              >
-                {/* ACTIVE BACKGROUND */}
-                {active === item.name && (
-                  <motion.div
-                    layoutId="activeNav"
-                    className="absolute inset-0 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 rounded-xl border border-cyan-400/30"
-                    transition={{
-                      type: "spring",
-                      stiffness: 300,
-                      damping: 25,
-                    }}
-                  />
-                )}
 
-                {/* ITEM */}
-                <div className="relative flex items-center gap-3 p-3 rounded-xl transition-all duration-300 hover:bg-white/5 hover:scale-[1.02]">
-
-                  <Icon
-                    size={20}
-                    className={
-                      active === item.name
-                        ? "text-cyan-300"
-                        : "text-gray-400"
-                    }
-                  />
-
-                  <span
-                    className={
-                      "hidden lg:block font-medium " +
-                      (active === item.name
-                        ? "text-cyan-300"
-                        : "text-gray-300")
-                    }
-                  >
-                    {item.name}
-                  </span>
-
-                </div>
-              </button>
-            );
-          })}
-        </nav>
-      </aside>
-
-      {/* ================= MOBILE NAV ================= */}
-      <nav className="fixed md:hidden bottom-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-xl border-t border-white/10 flex justify-around py-3">
-
-        {navItems.map((item) => {
-          const Icon = item.icon;
-
-          return (
-            <button
-              key={item.name}
-              onClick={() => setActive(item.name)}
-              className="relative flex flex-col items-center"
-            >
-              <Icon
-                className={
-                  active === item.name
-                    ? "text-cyan-300"
-                    : "text-gray-400"
-                }
-              />
-
-              {/* ACTIVE DOT */}
-              {active === item.name && (
-                <motion.div
-                  layoutId="mobileActive"
-                  className="w-1.5 h-1.5 bg-cyan-400 rounded-full mt-1"
-                />
-              )}
-            </button>
-          );
-        })}
-      </nav>
-    </>
-  );
+);
 }
